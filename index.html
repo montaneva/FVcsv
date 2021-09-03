@@ -1,28 +1,32 @@
+
 <!doctype html>
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Autocomplete</title>
+<title>Principis actius en català</title>
+
+<meta name="Author" content="Dra Eva Montané" />
+<meta name="Copyright" content="Dra Eva Montané" />
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 
 <style>
 
-body { margin: 1% 5%; }
-
-h4 {margin:0}
-div {text-align:left;}
-p {margin: 5px 0}
+body { color:coral; margin: 1% 5%; font-size:1em}
+h2, p  { color:black !important}
+h2 {margin: 0; padding:0;font-size:120%}
+h2, div {text-align:left;}
+p {margin: 8px 0; font-size:90%}
 ul { float:left; padding-left:10px}
 
 li {padding: 8px 0px; color:steelblue; list-style-type:none}
 li:hover {  font-weight:bold; border-top: 1px dotted steelblue;border-bottom: 1px dotted steelblue;}
 
 input[type="text"] {
-	text-transform:uppercase;
-  width: 80%;
+    text-transform:uppercase;
+  width: 70%;
   height: 34px;
-  margin:20px auto;
+  margin:10px auto;
   padding: 6px 12px;
   font-size: 16px;
   color: grey;
@@ -31,96 +35,61 @@ input[type="text"] {
   }
   
   
-	@media only screen and (max-width:500px){
-			p {font-size: 12px}
-			ul { padding-left: 2px}
-			input[type="text"] { width: 95%;}
-	}
- 	  
+    @media only screen and (max-width:500px){
+            p {font-size: 12px}
+            ul { padding-left: 2px}
+            input[type="text"] { width: 95%;}
+    }
+      
+
 </style>
 </head>
 
 <body>
 
 <center>
-<h2>Autocomplete - Suggest</h2>
-<div  id="q_farmacs" >
-		<h4>Farmacs</h4>
-		<p>Font: <a href="https://github.com/montaneva/FVcsv/blob/master/farmacs.csv" title="GithUB" target="github">https://github.com/montaneva/FVcsv/blob/master/farmacs.csv</a></p>
-		<input class="farmacs " type="text" size="50"  value="" maxlength='150' />	
 
+<h2>[Farmacologia] Principis actius en català</h2>
+
+<div  id="q_farmacs" >
+
+        <p>Llistat CSV. +3200 principis actius en català per programes informàtics de farmacovigilància.<br />
+Basat en el 'Lèxic de fàrmacs' disponible a la web <a href="https://www.termcat.cat/es/diccionaris-en-linia/12" rel="external">ww.termcat.cat</a>. <br /><br />
+Font (csv): <a href="https://raw.githubusercontent.com/montaneva/FVcsv/master/farmacs.csv" title="GithUB" target="github">https://raw.githubusercontent.com/montaneva/FVcsv/master/farmacs.csv</a>
+        </p>
+        <form>
+            <input class="farmacs " type="text" size="40"  maxlength='150'  onFocus="if (this.value == this.defaultValue) { this.value = ''; }"/>
+            &nbsp; <button onclick="this.form.reset();">Clear</button>
+        </form>
 </div>
-            
+ 
+
 <script type="text/javascript">
+
+
         
         $(function() {
         
-        	var url = 'https://raw.githubusercontent.com/montaneva/FVcsv/master/farmacs.csv';
-        	var testArr = new Array();
+        $('input[type="text"]').get(0).focus();
+        
+            var url = 'https://raw.githubusercontent.com/montaneva/FVcsv/master/farmacs.csv';
+            var testArr = new Array();
             
             $.get(url, function(data) {
             
                 fullArray = $.csv.toArrays(data);
                 
-                	$(fullArray).each(function(i, item) {
-                		testArr.push(item[0].slice(0, -1));
-                	});
-                	
-                	$('#q_farmacs  input.farmacs').autocomplete({
-                		source: testArr
-                	});
+                    $(fullArray).each(function(i, item) {
+                        testArr.push(item[0].slice(0, -1));
+                    });
+                    
+                    $('#q_farmacs  input.farmacs').autocomplete({
+                        source: testArr
+                    });
             });
         });
         
 </script>
-
-
-
-
-
-<div style="margin-top:50px"  id="q_ramDescripcio" >
-		<h4>RAM descripció</h4>
-		<p>Font: <a href="" title="GithUB" target="github"></a></p>
-		<input class="farmacs " type="text" size="50"  value="" maxlength='150' />	
-
-</div>
-            
-<script type="text/javascript">
-        
-        $(function() {
-        
-        	var url2 = 'ramDescripcio.csv';
-        	var testArr = new Array();
-            
-            $.get(url2, function(data) {
-            
-                fullArray = $.csv.toArrays(data);
-                
-                	$(fullArray).each(function(i, item) {
-                		testArr.push(item[0].slice(0, -1));
-                	});
-                	
-                	$('#q_ramDescripcio  input.farmacs').autocomplete({
-                		source: testArr
-                	});
-            });
-        });
-        
-
-
-
- $(document).ready(function() {
-
-    $('input').blur(function() {
-        $('input').removeClass("focus");
-      })
-      .focus(function() {
-        $(this).addClass("focus")
-      });
-  });
-  
-  </script>
-
 
 <script type="text/javascript">
 /**
@@ -155,9 +124,12 @@ input[type="text"] {
 
 </script>
 
-<script   src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"   integrity="sha256-lnH4vnCtlKU2LmD0ZW1dU7ohTTKrcKP50WA9fa350cE="   crossorigin="anonymous"></script>
 
+
+<script  src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"   integrity="sha256-lnH4vnCtlKU2LmD0ZW1dU7ohTTKrcKP50WA9fa350cE="   crossorigin="anonymous"></script>
+
+	
 </center>
 
-	</body>
+    </body>
 </html>
